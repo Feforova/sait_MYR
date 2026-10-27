@@ -1,0 +1,12 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Сайт МУР хранит все данные в Firestore.
+    // Вход по паролю на сайте — это «замочек» для своих, а не настоящая защита:
+    // эти правила пускают любого, кто знает адрес проекта.
+    // Не храните здесь ничего по-настоящему секретного.
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
